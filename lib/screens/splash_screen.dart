@@ -14,15 +14,35 @@ class SplashScreen extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(
-          child: Container(
-            width: 200,
-            child: Image(
-              image: AssetImage(
-                'images/logo_splash.png',
+        body: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 80),
+              child: Center(
+                child: Image(
+                  image: AssetImage('images/logo_splash.png'),
+                ),
               ),
             ),
-          ),
+            Positioned(
+              bottom: 32,
+              child: Column(
+                children: [
+                  Text(
+                    'from',
+                    style: TextStyle(
+                        color: Colors.grey, fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    'ExpertFlutter',
+                    style: TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.w600),
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
