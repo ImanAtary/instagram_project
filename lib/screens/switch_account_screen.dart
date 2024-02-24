@@ -61,26 +61,26 @@ class SwitchScreeen extends StatelessWidget {
                                   color: Colors.white),
                             ),
                             SizedBox(height: 30),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('Confirm'),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xffF35383),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                    9,
-                                  ),
+                            SizedBox(
+                              height: 46,
+                              width: 129,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Confirm',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium,
                                 ),
+                                style:
+                                    Theme.of(context).elevatedButtonTheme.style,
                               ),
                             ),
                             SizedBox(height: 20),
                             Text(
                               'Switch Account',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
-                            )
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
                           ],
                         ),
                       ),
@@ -92,9 +92,21 @@ class SwitchScreeen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 163),
-            child: Text(
-              'Dont have an account ? Sign up',
-              style: TextStyle(fontSize: 20, color: Colors.white),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Don\'t have an account? / ',
+                  style: TextStyle(
+                      fontFamily: 'GB', fontSize: 16, color: Colors.grey),
+                ),
+                Text(
+                  'Sign up',
+                  style: TextStyle(
+                      fontFamily: 'GB', fontSize: 16, color: Colors.white),
+                ),
+              ],
             ),
           ),
         ],
