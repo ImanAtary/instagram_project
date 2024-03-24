@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:implement_instagram/screens/share_BottomSheet.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -26,42 +27,86 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 120,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 9,
-                  itemBuilder: (context, index) {
-                    return index == 0 ? _getAddStoryBox() : _getStroyBox();
-                  },
-                ),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: ElevatedButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    barrierColor: Colors.transparent,
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: DraggableScrollableSheet(
+                          initialChildSize: 0.4,
+                          minChildSize: 0.2,
+                          maxChildSize: 0.7,
+                          builder: (context, controler) {
+                            return BottomSheetPage(
+                              controller: controler,
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Text('Open ButtonShit Modal'),
               ),
-              _getStoryPost()
-            ],
-          ),
+            ),
+            SliverToBoxAdapter(
+              child: _getStoryList(),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return Column(
+                    children: [
+                      _getHeaderPost(),
+                      _getPost(),
+                    ],
+                  );
+                },
+                childCount: 4,
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _getStoryPost() {
-    return ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            _getHeaderPost(),
-            _getPost(),
-          ],
-        );
-      },
+  Widget _getStoryList() {
+    return Container(
+      height: 120,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return index == 0 ? _getAddStoryBox() : _getStroyBox();
+        },
+      ),
     );
   }
+  // Widget _getStoryPost() {
+  //   return ListView.builder(
+  //     physics: NeverScrollableScrollPhysics(),
+  //     shrinkWrap: true,
+  //     itemCount: 10,
+  //     itemBuilder: (context, index) {
+  //       return Column(
+  //         children: [
+  //           _getHeaderPost(),
+  //           _getPost(),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   Widget _getPost() {
     return Container(
